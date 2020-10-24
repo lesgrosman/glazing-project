@@ -1,5 +1,5 @@
 import postData from '../services/services';
-import {showModal, hideModal} from './modals';
+import {showModal, hideModal, calcScroll} from './modals';
 import validateForm from './validateForm';
 
 function forms(state) {
@@ -15,14 +15,16 @@ function forms(state) {
     };
 
     function showThanksModal(message) {
-        const prevModalDialog = document.querySelector('.shown');
+        const prevModalDialog = document.querySelector('.shown'),
+              scroll = calcScroll();
+
         if (prevModalDialog) {
             hideModal('.shown');
         }
         
         const modalDialog = document.querySelector('.popup_dialog');
         modalDialog.classList.add('hide');
-        showModal('.popup');
+        showModal('.popup', scroll);
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('popup_dialog');
